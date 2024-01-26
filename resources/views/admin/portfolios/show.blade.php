@@ -10,9 +10,11 @@
 
     <div class="container mt-4">
 
+        <h6 class="mt-4">Tipologia: </h6>
+        {{ $portfolio->type? $portfolio->type->name : 'Nessuna tipologia' }}
 
 
-        <h6>Descrizione: </h6>
+        <h6 class="mt-4">Descrizione: </h6>
         <p>
             {{ $portfolio->description }}
         </p>
@@ -25,7 +27,7 @@
     </div>
 
 
-    <div class="mx-2 mt-3 d-flex">
+    <div class="mx-2 my-3 d-flex">
         <a class="btn btn-warning me-2" href="{{ route('admin.portfolios.edit', ['portfolio' => $portfolio->slug]) }}">
             <i class="fa-solid fa-pen-to-square"></i>
         </a>
