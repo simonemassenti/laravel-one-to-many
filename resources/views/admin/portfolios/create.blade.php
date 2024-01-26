@@ -36,6 +36,16 @@
 
             </div>
 
+            <div class="mb-3">
+                <label for="type" class="form-label">Tipologia</label>
+                <select class="form-select" name="type_id" id="type">
+                    <option @selected(!old('type_id')) value="">Seleziona una tipologia</option>
+                    @foreach ($types as $type)
+                        <option @selected(old('type_id') == $type->id) value="{{ $type->id }}">{{ $type->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+
             <button class="btn btn-success" type="submit">Crea</button>
         </form>
     </div>

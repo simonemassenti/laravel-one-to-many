@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StorePortfolioRequest;
 use App\Http\Requests\UpdatePortfolioRequest;
 use App\Models\Portfolio;
+use App\Models\Type;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -29,7 +30,8 @@ class PortfolioController extends Controller
 	 */
 	public function create()
 	{
-		return view('admin.portfolios.create');
+        $types = Type::all();
+		return view('admin.portfolios.create', compact('types'));
 	}
 
 	/**
@@ -42,9 +44,10 @@ class PortfolioController extends Controller
 	{
 		
 		$form_data = $request->validated();
-	   
+
 		$portfolio = new Portfolio;
 		$portfolio->fill($form_data);
+        
 		$portfolio->save();
 
 		return redirect()->route('admin.portfolios.show', ['portfolio' => $portfolio->slug]);
@@ -70,7 +73,8 @@ class PortfolioController extends Controller
 	 */
 	public function edit(Portfolio $portfolio)
 	{
-		return view('admin.portfolios.edit', compact('portfolio'));
+        $types = Type::all();
+		return view('admin.portfolios.edit', compact('portfolio'), compact('types'));
 	}
 
 	/**
