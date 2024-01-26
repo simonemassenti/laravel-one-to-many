@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\PortfolioController;
+use App\Http\Controllers\Admin\TypeController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -38,6 +39,7 @@ Route::middleware(['auth', 'verified'])
 		->name('dashboard');
 		Route::resource('portfolios', PortfolioController::class)
         ->parameters(['portfolios' => 'portfolio:slug']);
+        Route::resource('types', TypeController::class)->parameters(['types' => 'type:slug']); 
 	});
 
 

@@ -24,7 +24,6 @@
             <thead>
                 <tr>
                     <th scope="col">Titolo</th>
-                    {{-- <th scope="col" class="w-50">Descrizione</th> --}}
                     <th scope="col">Data</th>
                     <th scope="col">Actions</th>
                 </tr>
@@ -33,7 +32,6 @@
                 @foreach ($portfolios as $portfolio)
                     <tr>
                         <th>{{ $portfolio->title }}</th>
-                        {{-- <td>{{ $portfolio->description }}</td> --}}
                         <td>{{ $portfolio->created_at->format('d/m/Y') }}</td>
                         <td>
 
