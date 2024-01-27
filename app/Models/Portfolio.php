@@ -11,7 +11,7 @@ class Portfolio extends Model
 {
     use HasFactory;
     use SoftDeletes;
-    protected $fillable=['title', 'description', 'slug', 'type_id', 'image_cover'];
+    protected $fillable=['title', 'description', 'slug', 'type_id', 'cover_image'];
 
 
     //Mutator che setta lo slug in base al titolo

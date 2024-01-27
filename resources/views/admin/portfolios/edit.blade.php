@@ -10,7 +10,7 @@
     <h2 class="text-center mt-5">Modifica il Portfolio</h2>
 
     <div class="container w-50">
-        <form action="{{ route('admin.portfolios.update', ['portfolio' => $portfolio->slug]) }}" method="POST">
+        <form action="{{ route('admin.portfolios.update', ['portfolio' => $portfolio->slug]) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
             <div class="mb-3">
@@ -40,6 +40,16 @@
                         <option @selected(old('type_id') == $portfolio->type_id) value="{{ $type->id }}">{{ $type->name }}</option>
                     @endforeach
                 </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="image" class="form-label">Scegli l'immagine</label>
+                <input id="image" type="file" class="form-control" name="cover_image">
+                @error('cover_image')
+                    <div class="text-danger">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
 
             <button class="btn btn-warning" type="submit">Modifica</button>

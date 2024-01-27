@@ -11,7 +11,7 @@
     <div class="container mt-4">
 
         <h6 class="mt-4">Tipologia: </h6>
-        {{ $portfolio->type? $portfolio->type->name : 'Nessuna tipologia' }}
+        {{ $portfolio->type ? $portfolio->type->name : 'Nessuna tipologia' }}
 
 
         <h6 class="mt-4">Descrizione: </h6>
@@ -25,8 +25,14 @@
         <h6 class="mt-4">Slug: </h6>
         {{ $portfolio->slug }}
 
-        <h6 class="mt-4">Immagine: </h6>
-        <img src="{{ asset('storage/'. $portfolio->cover_image) }}" alt="Immagine di {{ $portfolio->title }}">
+        @if ($portfolio->cover_image)
+            <h6 class="mt-4">Immagine: </h6>
+            <img src="{{ asset('storage/' . $portfolio->cover_image) }}" alt="Immagine di {{ $portfolio->title }}">
+        @else
+            <h6 class="mt-4">Nessuna immagine presente </h6>
+        @endif
+
+
 
     </div>
 

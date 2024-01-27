@@ -94,7 +94,16 @@ class PortfolioController extends Controller
 	public function update(UpdatePortfolioRequest $request, Portfolio $portfolio)
 	{
 		$form_data = $request->all();
+        if($request->hasFile('cover_image')){
+            
+            if($portfolio->cover_image){
+                Storage::delete($portfolio->cover_image);
+            }
+            $image_path = Storage::put('portfolio_images', $request->cover_image);
+            $form_data['cover_image'] = $image_path;
+        }
 		$portfolio->update($form_data);
+
 
 		return redirect()->route('admin.portfolios.show', ['portfolio' => $portfolio->slug]);
 	}
@@ -108,7 +117,10 @@ class PortfolioController extends Controller
 	public function destroy(Portfolio $portfolio)
 	{
 		$portfolio->delete();
-        Storage::delete($portfolio->cover_image);
+        if($portfolio->cover_image){
+          Storage::delete($portfolio->cover_image);  
+        }
+        
 		return redirect()->route('admin.portfolios.index')->with('message', " Il portfolio: \"$portfolio->title\" è stato eliminato");
 	}
 }
