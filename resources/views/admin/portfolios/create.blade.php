@@ -7,13 +7,13 @@
 
     <h2 class="text-center mt-5">Crea un nuovo portfolio</h2>
 
-    <div class="container w-50">
-        <form action="{{ route('admin.portfolios.store') }}" method="POST">
+    <div class="container w-50 my-5">
+        <form action="{{ route('admin.portfolios.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="mb-3 has-validation">
                 <label for="title" class="form-label">Titolo</label>
-                <input type="text" class="form-control @error('title') is-invalid @enderror" id="title" name="title"
-                    value="{{ old('title') }}">
+                <input type="text" class="form-control @error('title') is-invalid @enderror" id="title"
+                    name="title" value="{{ old('title') }}">
 
                 @error('title')
                     <div class="text-danger">
@@ -44,6 +44,16 @@
                         <option @selected(old('type_id') == $type->id) value="{{ $type->id }}">{{ $type->name }}</option>
                     @endforeach
                 </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="image" class="form-label">Scegli l'immagine</label>
+                <input id="image" type="file" class="form-control" name="cover_image">
+                @error('cover_image')
+                    <div class="text-danger">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
 
             <button class="btn btn-success" type="submit">Crea</button>

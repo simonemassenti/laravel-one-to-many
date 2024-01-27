@@ -8,6 +8,7 @@ use App\Http\Requests\UpdatePortfolioRequest;
 use App\Models\Portfolio;
 use App\Models\Type;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class PortfolioController extends Controller
@@ -42,11 +43,17 @@ class PortfolioController extends Controller
 	 */
 	public function store(StorePortfolioRequest $request)
 	{
-		
 		$form_data = $request->validated();
-
+        
 		$portfolio = new Portfolio;
 		$portfolio->fill($form_data);
+        //Se i dati del form contengono un file chiamato cover_image 
+        //Allora salviamo in $img_path il percorso per il file caricato
+        //E il percorso lo salviamo nel DB nella colonna cover_image
+        if($request->hasFile('cover_image')){
+           $img_path = Storage::put('portfolio_images', $request->cover_image); 
+           $portfolio->cover_image = $img_path;
+        }
         
 		$portfolio->save();
 

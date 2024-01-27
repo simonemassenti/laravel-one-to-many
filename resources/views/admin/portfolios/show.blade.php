@@ -24,6 +24,10 @@
 
         <h6 class="mt-4">Slug: </h6>
         {{ $portfolio->slug }}
+
+        <h6 class="mt-4">Immagine: </h6>
+        <img src="{{ asset('storage/'. $portfolio->cover_image) }}" alt="Immagine di {{ $portfolio->title }}">
+
     </div>
 
 
