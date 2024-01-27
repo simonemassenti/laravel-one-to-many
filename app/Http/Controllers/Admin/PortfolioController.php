@@ -108,6 +108,7 @@ class PortfolioController extends Controller
 	public function destroy(Portfolio $portfolio)
 	{
 		$portfolio->delete();
+        Storage::delete($portfolio->cover_image);
 		return redirect()->route('admin.portfolios.index')->with('message', " Il portfolio: \"$portfolio->title\" è stato eliminato");
 	}
 }
